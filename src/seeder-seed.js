@@ -6,11 +6,11 @@ import path from 'path'
 
 program.parse(process.argv)
 
-program.args.forEach(async (arg) => {
-  try {
-    const res = await seed(path.normalize(arg))
-    console.log('Seeding ' + res.infoHash)
-  } catch (err) {
-    console.error(err.message)
-  }
+const videoPath = program.args[0]
+const desc = program.args[1]
+const name = program.args[2]
+const categories = program.args[3]
+
+seed(path.normalize(videoPath), desc, name, categories).then((res) => {
+  console.log('Seeding ' + res.torrentHashInfo)
 })

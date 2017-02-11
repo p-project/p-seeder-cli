@@ -11,11 +11,14 @@ export function add (torrent) {
   })
 }
 
-export function seed (path) {
+export function seed (path, desc, name, categories) {
   return rp.post({
     url: `${daemon}/seed`,
     json: {
-      'path': path
+      path: path,
+      desc: desc,
+      name,
+      categories
     }
   })
 }
@@ -23,6 +26,7 @@ export function seed (path) {
 export function remove (torrent) {
   return rp.delete(`${daemon}/delete/${torrent}`)
 }
+
 export async function list () {
   const res = await rp.get(`${daemon}/list`)
   return JSON.parse(res)
