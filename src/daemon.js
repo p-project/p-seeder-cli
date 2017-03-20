@@ -1,6 +1,6 @@
 import rp from 'request-promise'
 
-const daemon = 'http://localhost:2342'
+export const daemon = 'http://localhost:2342'
 
 export function add (torrent) {
   return rp.post({
