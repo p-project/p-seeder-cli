@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import program from 'commander'
-import path from 'path'
+import nodePath from 'path'
 import { add, seed, list, info, remove } from './daemon'
 import { handleError } from './error'
 import humanizeDuration from 'humanize-duration'
@@ -69,7 +69,7 @@ program
   .description('Seed a new torrent')
   .action(async(path, description, name, category) => {
     try {
-      const res = await seed(path.normalize(path), description, name, category)
+      const res = await seed(nodePath.resolve(path), description, name, category)
       console.log('Seeding ' + res.torrentHashInfo)
     } catch (err) {
       handleError(err)

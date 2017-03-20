@@ -5,13 +5,23 @@ export function handleError (e) {
   if (e.name === 'RequestError') {
     print(`Could not contact server at ${daemon}`)
   } else if (e.name == 'StatusCodeError') {
-    print(`Server answered with status code ${e.statusCode}`)
+    try {
+      const error = isObject(e.error) ? e.error.message : JSON.parse(e.error).message
+      print(error)
+    } catch(err) {
+      print(e.message)
+    }
   } else {
-    console.log(e.message)
+    print(e.message)
   }
   process.exit(1)
 }
 
 function print (err) {
   console.error(chalk.red(err))
+}
+
+function isObject(val) {
+  if (val === null) { return false;}
+  return ( (typeof val === 'function') || (typeof val === 'object') )
 }
