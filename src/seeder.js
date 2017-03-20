@@ -4,6 +4,8 @@ import program from 'commander'
 import path from 'path'
 import { add, seed, list, info, remove } from './daemon'
 import { handleError } from './error'
+import humanizeDuration from 'humanize-duration'
+import prettySize from 'prettysize'
 
 program
   .command('add <tid...>')
@@ -48,8 +50,7 @@ program
   .command('status <tid...>')
   .description('Show the status of torrents.')
   .option('-d --debug', 'Print complete status in JSON')
-  .action((tid) =>
-    program.args.forEach(async (arg) => {
+  .action((tid) => tid.forEach(async (arg) => {
       try {
         const i = await info(arg)
         if (program.debug) {
