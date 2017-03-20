@@ -1,8 +1,8 @@
 import rp from 'request-promise'
 
-const daemon = 'http://localhost:2342'
+export const daemon = 'http://localhost:2342'
 
-export function add (torrent) {
+export async function add (torrent) {
   return rp.post({
     url: `${daemon}/add`,
     json: {
@@ -11,7 +11,7 @@ export function add (torrent) {
   })
 }
 
-export function seed (path, desc, name, categories) {
+export async function seed (path, desc, name, categories) {
   return rp.post({
     url: `${daemon}/seed`,
     json: {
@@ -23,7 +23,7 @@ export function seed (path, desc, name, categories) {
   })
 }
 
-export function remove (torrent) {
+export async function remove (torrent) {
   return rp.delete(`${daemon}/delete/${torrent}`)
 }
 

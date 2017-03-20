@@ -4,23 +4,24 @@ import program from 'commander'
 import humanizeDuration from 'humanize-duration'
 import prettySize from 'prettysize'
 import { info } from './daemon'
+import { handleError } from './error'
 
 program
   .option('-d --debug', 'Print complete status in JSON')
   .parse(process.argv)
 
-program.args.forEach(async (arg) => {
-  try {
+try {
+  program.args.forEach(async (arg) => {
     const i = await info(arg)
     if (program.debug) {
       console.log(JSON.stringify(i, null, 2))
     } else {
       prettyPrint(i)
     }
-  } catch (err) {
-    console.error(err.message)
-  }
-})
+  })
+} catch (err) {
+  handleError(err)
+}
 
 function prettyPrint (info) {
   let remaining = info.timeRemaining === 0 ? ''

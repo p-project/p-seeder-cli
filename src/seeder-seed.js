@@ -3,6 +3,7 @@
 import program from 'commander'
 import { seed } from './daemon'
 import path from 'path'
+import { handleError } from './error'
 
 program.parse(process.argv)
 
@@ -16,6 +17,11 @@ const desc = program.args[1]
 const name = program.args[2]
 const categories = program.args[3]
 
-seed(path.normalize(videoPath), desc, name, categories).then((res) => {
-  console.log('Seeding ' + res.torrentHashInfo)
-})
+(async() => {
+  try {
+    const res = await seed(path.normalize(videoPath), desc, name, categories)
+    console.log('Seeding ' + res.torrentHashInfo)
+  } catch (err) {
+    handleError(err)
+  }
+})()

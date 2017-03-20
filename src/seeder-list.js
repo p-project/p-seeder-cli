@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { list, info } from './daemon'
+import { handleError } from './error'
 
 (async() => {
   try {
@@ -10,7 +11,6 @@ import { list, info } from './daemon'
       console.log(`${(i.progress * 100).toFixed(0)}% ${i.infoHash} ${i.name}`)
     })
   } catch (e) {
-    console.error(e.message)
-    process.exit(1)
+    handleError(e)
   }
 })()

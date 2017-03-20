@@ -2,16 +2,15 @@
 
 import program from 'commander'
 import { add } from './daemon'
+import { handleError } from './error'
 
 program.parse(process.argv)
 
-program.args.forEach((arg) => {
+program.args.forEach(async (arg) => {
   try {
-    add(arg).then((res) => {
-      console.log('Added ' + res)
-    })
+    const res = await add(arg)
+    console.log('Added ' + res)
   } catch (e) {
-    console.error(e)
-    process.exit(1)
+    handleError(e)
   }
 })

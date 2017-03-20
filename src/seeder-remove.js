@@ -2,6 +2,7 @@
 
 import program from 'commander'
 import { remove } from './daemon'
+import { handleError } from 'error'
 
 program.parse(process.argv)
 
@@ -10,6 +11,6 @@ program.args.forEach(async (arg) => {
     await remove(arg)
     console.log('Removed ' + arg)
   } catch (err) {
-    console.error(err.message)
+    handleError(err)
   }
 })
