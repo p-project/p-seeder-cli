@@ -5,7 +5,7 @@ export function handleError (e) {
   if (e.name === 'RequestError') {
     print(`Could not contact server at ${daemon}`)
   } else if (e.name == 'StatusCodeError') {
-    print(`Server answered with status code ${e.reason.statusCode}`)
+    print(`Server answered with status code ${e.statusCode}`)
   } else {
     console.log(e.message)
   }

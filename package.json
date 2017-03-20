@@ -42,14 +42,6 @@
     "nodemon": "^1.11.0"
   },
   "bin": {
-    "pseeder": "dist/seeder.js",
-    "pseeder-add": "dist/seeder-add.js",
-    "pseeder-a": "dist/seeder-add.js",
-    "pseeder-list": "dist/seeder-list.js",
-    "pseeder-ls": "dist/seeder-list.js",
-    "pseeder-remove": "dist/seeder-remove.js",
-    "pseeder-rm": "dist/seeder-remove.js",
-    "pseeder-seed": "dist/seeder-seed.js",
-    "pseeder-status": "dist/seeder-status.js"
+    "pseeder": "dist/seeder.js"
   }
 }
